@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelsen Code Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Kelsen Code Generator</h1>
+            <p class="mt-2 text-gray-600">Paste your input text to generate Kelsen code</p>
+        </div>
+
+        <div class="bg-white shadow rounded-lg p-6">
+            <form id="generateForm" class="space-y-6">
+                <div>
+                    <label for="input_text" class="block text-sm font-medium text-gray-700">Input Text</label>
+                    <textarea id="input_text" name="input_text" rows="4" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        placeholder="Paste your input text here..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <!-- First Party -->
+                    <div class="border rounded-lg p-4 bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">First Party</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="role1" class="block text-sm font-medium text-gray-700">Role</label>
+                                <select id="role1" name="role1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="ACREEDOR">ACREEDOR</option>
+                                    <option value="DEUDOR">DEUDOR</option>
+                                    <option value="VENDEDOR">VENDEDOR</option>
+                                    <option value="COMPRADOR">COMPRADOR</option>
+                                    <option value="ARRENDADOR">ARRENDADOR</option>
+                                    <option value="ARRENDATARIO">ARRENDATARIO</option>
+                                    <option value="MUTUANTE">MUTUANTE</option>
+                                    <option value="MUTUARIO">MUTUARIO</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="name1" class="block text-sm font-medium text-gray-700">Name</label>
+                                <input type="text" id="name1" name="name1" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="street1" class="block text-sm font-medium text-gray-700">Street Address</label>
+                                <input type="text" id="street1" name="street1" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="phone1" class="block text-sm font-medium text-gray-700">Phone</label>
+                                <input type="number" id="phone1" name="phone1" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="email1" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email1" name="email1" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Party -->
+                    <div class="border rounded-lg p-4 bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Second Party</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="role2" class="block text-sm font-medium text-gray-700">Role</label>
+                                <select id="role2" name="role2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="ACREEDOR">ACREEDOR</option>
+                                    <option value="DEUDOR">DEUDOR</option>
+                                    <option value="VENDEDOR">VENDEDOR</option>
+                                    <option value="COMPRADOR">COMPRADOR</option>
+                                    <option value="ARRENDADOR">ARRENDADOR</option>
+                                    <option value="ARRENDATARIO">ARRENDATARIO</option>
+                                    <option value="MUTUANTE">MUTUANTE</option>
+                                    <option value="MUTUARIO">MUTUARIO</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="name2" class="block text-sm font-medium text-gray-700">Name</label>
+                                <input type="text" id="name2" name="name2" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="street2" class="block text-sm font-medium text-gray-700">Street Address</label>
+                                <input type="text" id="street2" name="street2" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="phone2" class="block text-sm font-medium text-gray-700">Phone</label>
+                                <input type="number" id="phone2" name="phone2" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="email2" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email2" name="email2" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" 
+                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Generate
+                    </button>
+                </div>
+            </form>
+
+            <div id="loader" class="hidden mt-4 flex justify-center">
+                <div class="loader"></div>
+            </div>
+
+            <div id="result" class="mt-6 hidden">
+                <h2 class="text-lg font-medium text-gray-900 mb-2">Generated Kelsen Code:</h2>
+                <pre id="generated_code" class="bg-gray-50 rounded-md p-4 overflow-x-auto"></pre>
+                <div id="execution-result" class="mt-4 hidden">
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Execution Result:</h3>
+                    <pre id="execution-output" class="bg-gray-50 rounded-md p-4 overflow-x-auto whitespace-pre-wrap"></pre>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Natural Language Contract:</h3>
+                        <pre id="contract-output" class="bg-green-50 rounded-md p-4 overflow-x-auto whitespace-pre-wrap"></pre>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Legal Analysis Report:</h3>
+                        <pre id="legal-output" class="bg-blue-50 rounded-md p-4 overflow-x-auto whitespace-pre-wrap"></pre>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Kelsen Execution Output:</h3>
+                        <pre id="kelsen-output" class="bg-gray-50 rounded-md p-4 overflow-x-auto whitespace-pre-wrap"></pre>
+                    </div>
+                </div>
+                <div class="mt-2 flex space-x-2">
+                    <button onclick="copyToClipboard()" 
+                        class="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Copy to Clipboard
+                    </button>
+                    <button id="downloadButton"
+                        class="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        Download .kelsen
+                    </button>
+                    <button id="executeButton"
+                        class="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Execute with Kelsen
+                    </button>
+                </div>
+            </div>
+
+            <div id="error" class="mt-4 hidden">
+                <div class="bg-red-50 border-l-4 border-red-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p id="error_message" class="text-sm text-red-700"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+document.getElementById('generateForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const loader = document.getElementById('loader');
+    const result = document.getElementById('result');
+    const error = document.getElementById('error');
+    
+    // Get all form data
+    const formData = {
+        input_text: document.getElementById('input_text').value,
+        party1: {
+            role: document.getElementById('role1').value,
+            name: document.getElementById('name1').value,
+            street: document.getElementById('street1').value,
+            phone: document.getElementById('phone1').value,
+            email: document.getElementById('email1').value
+        },
+        party2: {
+            role: document.getElementById('role2').value,
+            name: document.getElementById('name2').value,
+            street: document.getElementById('street2').value,
+            phone: document.getElementById('phone2').value,
+            email: document.getElementById('email2').value
+        }
+    };
+    
+    // Validate all fields are filled
+    const validateField = (name, value) => {
+        if (!value || value.trim() === '') {
+            throw new Error(`${name} is required`);
+        }
+        return value.trim();
+    };
+
+    try {
+        // Validate input text
+        validateField('Input text', formData.input_text);
+        
+        // Validate party 1
+        validateField('First party name', formData.party1.name);
+        validateField('First party street', formData.party1.street);
+        validateField('First party phone', formData.party1.phone);
+        validateField('First party email', formData.party1.email);
+        
+        // Validate party 2
+        validateField('Second party name', formData.party2.name);
+        validateField('Second party street', formData.party2.street);
+        validateField('Second party phone', formData.party2.phone);
+        validateField('Second party email', formData.party2.email);
+        
+        // Show loader and hide previous results/errors
+        loader.classList.remove('hidden');
+        result.classList.add('hidden');
+        error.classList.add('hidden');
+        
+        // Send request to server
+        const response = await fetch('/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show generated code
+            document.getElementById('generated_code').textContent = data.code;
+            result.classList.remove('hidden');
+            
+            // Set up download button
+            const downloadButton = document.getElementById('downloadButton');
+            downloadButton.onclick = () => {
+                window.location.href = data.download_url;
+            };
+            
+            // Set up execute button
+            const executeButton = document.getElementById('executeButton');
+            executeButton.onclick = async () => {
+                try {
+                    executeButton.disabled = true;
+                    executeButton.textContent = 'Executing...';
+                    
+                    const code = document.getElementById('generated_code').textContent;
+                    const execResponse = await fetch('/execute/' + data.code_id, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            code: code
+                        })
+                    });
+                    
+                    const execData = await execResponse.json();
+                    const executionResult = document.getElementById('execution-result');
+                    
+                    if (execData.success) {
+                        // Show natural language version
+                        const contractOutput = document.getElementById('contract-output');
+                        contractOutput.textContent = execData.natural_language;
+                        
+                        // Show legal analysis
+                        const legalOutput = document.getElementById('legal-output');
+                        legalOutput.textContent = execData.legal_analysis;
+                        
+                        // Show Kelsen output (optional)
+                        const kelsenOutput = document.getElementById('kelsen-output');
+                        kelsenOutput.textContent = execData.kelsen_output;
+                        
+                        // Show the entire results section
+                        executionResult.classList.remove('hidden');
+                        
+                        // Scroll to results
+                        executionResult.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        document.getElementById('error_message').textContent = 'Error: ' + execData.error;
+                        document.getElementById('error').classList.remove('hidden');
+                    }
+                } catch (err) {
+                    console.error('Error executing code:', err);
+                    document.getElementById('error_message').textContent = 'Error executing Kelsen code: ' + (err.message || 'Unknown error');
+                    document.getElementById('error').classList.remove('hidden');
+                } finally {
+                    executeButton.disabled = false;
+                    executeButton.textContent = 'Execute with Kelsen';
+                }
+            };
+            
+        } else {
+            document.getElementById('error_message').textContent = data.error;
+            error.classList.remove('hidden');
+        }
+    } catch (err) {
+        document.getElementById('error_message').textContent = err.message || 'An error occurred while generating the code';
+        error.classList.remove('hidden');
+    } finally {
+        loader.classList.add('hidden');
+    }
+});
+
+function copyToClipboard() {
+    const code = document.getElementById('generated_code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+        // Show temporary success message
+        const originalText = 'Copy to Clipboard';
+        const button = document.querySelector('button[onclick="copyToClipboard()"]');
+        button.textContent = 'Copied!';
+        button.classList.add('bg-green-100', 'text-green-700');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('bg-green-100', 'text-green-700');
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+        document.getElementById('error_message').textContent = 'Failed to copy to clipboard';
+        document.getElementById('error').classList.remove('hidden');
+    });
+}
+
+// Add input validation feedback
+const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="number"]');
+inputs.forEach(input => {
+    input.addEventListener('input', function() {
+        if (this.value.trim()) {
+            this.classList.remove('border-red-300');
+            this.classList.add('border-gray-300');
+        }
+    });
+});
+</script>
+</body>
+</html>
